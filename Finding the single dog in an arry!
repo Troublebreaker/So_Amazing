@@ -1,0 +1,34 @@
+//2.一个数组中只有两个数字是出现一次，其他所有数字都出现了两次。
+//找出这两个数字，编程实现。
+#include<stdio.h>
+#include<assert.h>
+#include<windows.h>
+int* findCoupleElemes(int arr[], int n);
+
+int main()
+{
+	int arr[] = { 1, 2, 3, 4, 3, 5 };
+	int n = sizeof(arr) / sizeof(arr[0]);
+
+	printf("the couple number is :%d\n\n", findCoupleElemes(arr, n));
+
+	system("pause");
+	return 0;
+}
+
+//定义查找函数
+int* findCoupleElemes(int arr[], int n)
+{
+	assert(arr);
+	int i = 0, j = 0;
+
+	for (i = ; i < n; i++)
+	{
+		if (((arr[0]) ^ (arr[i])) == 0)  //根据位操作特性，两个相等的数相与之后为0
+		{
+			return (arr[i]);             //两个数相等则返回该数
+		}
+	}
+
+	return NULL;
+}
