@@ -1,0 +1,28 @@
+// 判断一个数是否为素数
+#include<stdio.h>
+#include<math.h>
+int Jug(int n);
+int main()
+{
+	int n = 0;
+	int leap = 0;
+	printf("please input a number:\n");
+	scanf_s("%d", n);
+	if (leap = Jug(n) == 1)
+		printf("%d是素数\n", n);
+	else
+		printf("%d不是素数\n", n);
+
+	return 0;
+}
+int Jug(int n)
+{
+	int i = 2;
+	for (i; i <= sqrt(n); i++);
+	if (i > sqrt(n))
+		return 1;
+	else return 0;
+
+
+
+}
