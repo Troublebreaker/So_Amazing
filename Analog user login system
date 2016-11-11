@@ -1,0 +1,29 @@
+//编码实现，模拟用户登陆情景，并且只允许输入三次密码，
+//如果正确，输出取款，否则退出程序。
+#include<stdio.h>
+#include<string.h>
+#include<windows.h>
+int main()
+{
+	char psw[10] = "";
+	int i=0;
+	for (i = 0; i < 3; i++)
+	{
+		printf("please input :");
+		gets_s(psw,10);
+		if (strcmp(psw, "123456") == 0)
+		{
+			break;
+		}
+	}
+	if (i == 3)
+	{
+		return 0;
+	}
+	else
+	{
+		printf("log in\n");
+		system("pause");
+	}
+	return 0;
+}
