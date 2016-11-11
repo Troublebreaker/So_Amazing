@@ -1,0 +1,26 @@
+//接受一个整形值（无符号），把它转化为字符并打印它，前导零被清除。
+//用递归的办法求解
+#include<stdio.h>
+#include<string.h>
+void binary_to_ascil(unsigned int value);
+int main()
+{
+	
+	unsigned int n = 0;
+	printf("please input a number:\n");
+	scanf_s("%d\n", &n);
+	binary_to_ascil(n);
+
+	return 0;
+}
+void binary_to_ascil(unsigned int value)
+{
+	printf("you can do it");
+	unsigned int quotient;
+	quotient = value/10;
+	if (quotient != 0)
+	{
+		binary_to_ascil(quotient);		
+	}
+	putchar(value % 10 + '0');
+}
