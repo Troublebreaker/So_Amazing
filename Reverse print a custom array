@@ -1,0 +1,25 @@
+//逆序打印一个自定义数组
+#include <stdio.h>
+#include<windows.h>
+int main()
+{
+	int a[100];
+	int i = 0;
+	int n = 0;
+	printf("请输入元素的个数：\n");
+	scanf_s("%d", &n);
+	printf("请分别输入这%d个数\n", n);
+	for (i = 0; i < n; i++)
+	{
+		scanf_s("%d", &a[i]);
+	}
+	n--;
+	for (i = n; i >= 0; i--)
+	{
+
+		printf("%d ", a[i]);
+	}
+
+	system("pause");
+	return 0;
+}
