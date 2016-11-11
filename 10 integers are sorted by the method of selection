@@ -1,0 +1,36 @@
+#include<stdio.h>
+//用选择法对10个整数进行排序
+int main()
+{
+	void sort(int array[10],int n);
+	int a[10] = { 6, 5, 7, 9, 2, 1, 4, 7, 77, 11 };
+	int i = 0;
+	sort(a,10);
+	for (i = 0; i < 10; i++)
+	{
+
+		printf("%d ", a[i]);
+	}
+	return 0;
+}
+void sort(int array[],int n)
+{
+	int i, j;
+	int t = 0;
+	int k = 0;
+	for (i = 0; i < n - 1; i++)
+	{
+		k = i;
+		for (j = i + 1; j < n; j++)
+		{
+			if (array[j]>array[k])
+				k = j;
+		}
+		t = array[k];
+		array[k] = array[i];
+		array[i] = t;
+
+
+	}
+
+}
