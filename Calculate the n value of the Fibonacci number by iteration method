@@ -1,0 +1,29 @@
+//用迭代法计算第n个斐波那契数的值
+#include<stdio.h>
+#include<windows.h>
+long fibonacci(int n)
+{
+	long result;
+	long previous_result;
+	long next_order_result;
+	result = previous_result = 1;
+	while (n > 2)
+	{
+		n -= 1;
+		next_order_result = previous_result;
+		previous_result = result;
+		result = previous_result + next_order_result;
+	}
+
+	return result;
+}
+int main()
+{
+	int n = 0;
+	printf("请输入要查询的数：\n");
+	scanf_s("%d", &n);
+	
+	printf("%d\n", fibonacci(n));
+	system("pause");
+	return 0;
+}
