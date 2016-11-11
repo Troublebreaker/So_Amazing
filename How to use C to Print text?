@@ -1,0 +1,41 @@
+//使用字符串数组作为一个简单的文本编辑器的基础。
+//接受多行输入，直到接受一个空行，结束输入，将输入的所有行打印在屏幕上。
+#include<stdio.h>
+#include<windows.h>
+#define MAX 100
+#define LEN 80
+
+
+char text[MAX][LEN];
+
+
+int main()
+{
+	int t, i, j;
+	printf("enter an empty to quit\n");
+
+	//用户输入多行字符串  当一行字符串为空时退出输入
+	for (t = 0; t < MAX; t++)
+	{
+		printf("%d:", t);
+		gets_s(text[t],100);
+		if (!*text[t])     //当输入的该行为空时   if条件成立，执行break语句跳出循环。
+		{
+			break;
+		}
+	}
+
+	//打印该输入的文本
+	for (i = 0; i < t; i++)
+	{
+		for (j = 0; text[i][j]; j++)  //当text[i][j]==0时退出该行的打印
+		{
+			putchar(text[i][j]);   //逐个字符进行打印
+		}
+
+		putchar('\n');
+		puts(text[i]);    //使用另一种方式打印该文本
+	}
+	system("pause");
+	return 0;
+}
