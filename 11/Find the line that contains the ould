@@ -1,0 +1,57 @@
+#include<stdio.h>
+#include<windows.h>
+
+#define MAXLEN 1000
+
+//获取一行字符串
+int getline(char array[], int max)
+{
+    int ch;
+    int i = 0;
+    while ((ch = getchar())!=EOF&&ch!='\n'&&i < max)
+    {
+        array[i++] = ch;
+    }
+    if (ch == '\n')
+    {
+        array[i++] = ch;
+
+    }
+
+    array[i] = '\0';
+    return i;
+}
+
+//对pattern字符串进行检查
+int compare(char line[], char str[])
+{
+    int i, j, k;
+    for (i = 0; line[i] != '\0'; i++)
+    {
+        for (j = i, k = 0; str[k] == line[j] && str[k] != '\0'; j++, k++)         //每次检查对pattern首地址归0
+        {
+            ;
+        }
+
+        if (k > 0 && str[k] == '\0')
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int main()
+{
+    char array[MAXLEN];
+    char pattern[] = "ould";
+    while(getline(array, 100))
+    {
+        if (compare(array, pattern))
+        {
+            printf("%s\n", array);
+        }
+    }
+
+    return 0;
+}
