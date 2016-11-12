@@ -1,0 +1,50 @@
+
+#include<stdio.h>
+#include<string.h>
+#include<assert.h>
+#include<windows.h>
+#pragma warning(disable:4996)
+
+int isShiftStr(char*src, char*dst);
+
+int main()
+{
+	char str[] = "hello";
+	char dst[] = "ohell";
+
+	if (isShiftStr(str,dst))
+	{
+		printf("满足回旋\n");
+	}
+	else
+	{
+		printf("不满足回旋\n");
+	}
+
+	system("pause");
+	return 0;
+}
+
+//判断是否为回旋字符串函数
+int isShiftStr(char *src, char *dst)
+{
+	assert(src);
+	assert(dst);
+
+	if (strlen(src) == strlen(dst)){
+		int len = strlen(src);
+		char* buf = (char*)malloc(sizeof(char)*len * 2 + 1);
+		strcpy(buf, src);
+		strcat(buf, src);
+
+		if (strstr(buf, dst) == NULL){
+			free(buf);
+			buf = NULL;
+			return 0;
+		}
+		free(buf);
+		buf = NULL;
+		return 1;
+	}
+	return 0;
+}
