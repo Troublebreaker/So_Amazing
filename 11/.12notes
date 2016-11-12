@@ -1,0 +1,207 @@
+#include "test.h"
+
+void show(int *arr, int len)
+{
+assert(arr);
+assert(len > 0);
+int i = 0;
+for (; i < len; i++ ){
+printf("%d ", arr[i]);
+}
+printf("\n");
+}
+
+void clear_zero(int *arr, int len)
+{
+assert(arr);
+assert(len > 0);
+
+int i = 0;
+for (; i < len; i++){
+arr[i] = 0;
+}
+}
+//i>0, i==0
+int getline(char out[], int limit)
+{
+assert(out);
+assert(limit > 0);
+
+int i = 0;
+int c = 0;
+while (--limit>0 && (c = getchar()) != EOF &&\
+c != '\n'){
+out[i++] = c;
+}
+if ( c == '\n' ){
+out[i++] = c;
+}
+out[i] = '\0';
+return i;
+}
+
+int my_strstr(const char *dst, const char *sub)
+{
+assert(dst);
+assert(sub);
+char *dst_start = dst;
+char *sub_start = sub;
+char *pos = NULL;
+for (; *dst_start != '\0'; dst_start++){
+for (sub_start = sub, pos = dst_start; \
+*sub_start != '\0'&&\
+*pos != '\0' && \
+*sub_start == *pos;sub_start++, pos++){
+}
+
+if ( *sub_start == '\0' ){
+return 1;
+}
+}
+return 0;
+}
+
+void binary_to_ascii(unsigned int value)
+{
+unsigned int tmp = value / 10;
+if (tmp != 0){
+binary_to_ascii(tmp);
+}
+putchar(value%10 + '0');
+}
+int my_strlen(const char* str)
+{
+if (*str == '\0'){
+return 0;
+}
+return 1 + my_strlen(str + 1);
+}
+
+int factorial(int n)
+{
+if (n <= 1){
+return 1;
+}
+else{
+return n*factorial(n - 1);
+}
+}
+
+int count = 0;
+int fib(int n)
+{
+if (n <= 2){
+return 1;
+}
+if (n == 3){
+printf("fib(3) count is : %d\n" , count++);
+}
+return fib(n - 1) + fib(n - 2);
+}
+int average(int nums, ...)
+{
+va_list arg;
+va_start(arg, nums);
+
+int i = 0;
+int sum = 0;
+for (; i < nums; i++){
+sum += va_arg(arg, int);
+}
+va_end(arg);
+printf("sum: %d\n", sum);
+return sum / nums;
+}
+
+int main()
+{
+printf("%d\n", average(5, 12,23,34,12,23));
+//printf("%d\n", fib(20));
+//printf("%d\n", factorial(50));
+//binary_to_ascii(123456);
+//printf("%d\n", my_strlen("abcdefg"));
+//char buf[1024];
+//int len = 1024;
+//while (getline(buf, len) > 0){
+///	if (my_strstr(buf, "ould")){
+//	 printf("echo: %s\n", buf);
+//	}
+//}
+
+/*int arr[10];
+int len = sizeof(arr) / sizeof(arr[0]);
+show(arr, len);
+clear_zero(arr, len);
+show(arr, len);*/
+
+system("pause");
+return 0;
+}
+
+//void findSingleData(int *arr, int nums, int *s1, int *s2)
+//{
+//	assert(arr);
+//	assert(nums > 0);
+//	assert(s1);
+//	assert(s2);
+//
+//	//1. ^ -> s1 ^ s2
+//	int tmp = arr[0];
+//	int i = 1;
+//	for (; i < nums; i++){
+//	 tmp ^= arr[i];
+//	}
+//
+//	//2. get flag -> 
+//	int flag = 1;
+//	while (1){//<32
+//	 if (tmp & flag){
+//	 break;
+//	 }
+//	 flag <<= 1;
+//	}
+//	*s1 = 0;
+//	*s2 = 0;
+//	//3.fenlei
+//	for (i = 0; i < nums; i++){
+//	 //1. diff-> diff array
+//	 //2. same -> same array
+//	 if (arr[i] & flag){
+//	 *s1 ^= arr[i];
+//	 }
+//	 else{
+//	 *s2 ^= arr[i];
+//	 }
+//	}
+//}
+//
+//int main()
+//{
+//	int _array[] = {1,1,2,1111,2,3,3,4,4,2222,5,5,6,6};
+//	int len = sizeof(_array) / sizeof(_array[0]);
+//	int single1 = 0;
+//	int single2 = 0;
+//	findSingleData(_array, len, &single1, &single2);
+//
+//	printf("%d, %d\n", single1, single2);
+//	system("pause");
+//	return 0;
+//}
+
+#ifndef _TEST_
+#define _TEST_
+
+#include <stdio.h>
+#include <assert.h>
+#include <windows.h>
+
+void clear_zero(int *arr, int len);
+void show(int *arr, int len);
+int getline(char out[], int limit);
+void binary_to_ascii(unsigned int value);
+int my_strlen(const char* str);
+int factorial(int n);
+int fib(int n);
+int average(int nums, ...);
+
+#endif
