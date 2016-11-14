@@ -1,0 +1,81 @@
+#include<stdio.h>
+#include<windows.h>
+#include<stdarg.h>
+#include<assert.h>
+void my_printf(char*format, ...);
+void myPutInt(int a);
+
+int main()
+{
+	int a = 10;
+	char b = 'F';
+	char*str = "hello,bit!";
+
+	my_printf("a=%d\nb=%c\n*str=%s\n", a, b, str);
+	system("pause");
+
+	return 0;
+}
+
+//定义my_prinf,实现打印3种类型 int char 字符串
+void my_printf(char*format, ...)
+{
+	assert(format);
+	va_list arg_list;
+	va_start(arg_list, format);
+	const char*start = format;
+	while (*start != '\0')
+	{
+		if (*start == '%')
+		{
+			start++;
+			switch (*start)
+			{
+			case 'd':
+			{
+						int _int =va_arg(arg_list, int);
+						myPutInt(_int);
+						start++;
+						break;
+			}
+			case 'c':
+			{
+						char _char = va_arg(arg_list, char);
+						putchar(_char);
+						start++;
+						break;
+			}
+			case 's':
+			{
+						char* _string = va_arg(arg_list, char*);
+						while (* _string)
+						{
+							putchar(*_string++);
+						}
+						start++;
+						break;
+			}
+
+			}
+
+		}
+		else
+		{
+			putchar(*start);
+			start++;
+		}
+	}
+	va_end(arg_list);
+}
+
+//定义打印整形的函数
+void myPutInt(int a)
+{
+	int prev = a / 10;
+	if (prev)
+	{
+		myPutInt(prev);
+	}
+	putchar(a % 10 + '0');
+
+}
