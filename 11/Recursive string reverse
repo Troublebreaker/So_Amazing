@@ -1,0 +1,23 @@
+#include<stdio.h>  
+#include<windows.h>
+char s[1000];
+void reverse(char *s)
+{
+
+    if (*s)
+    {
+        reverse(s+1);
+        printf("%c", *s);
+    }
+    return;     
+}
+
+int main()
+{
+    gets_s(s, 100);
+    reverse(s);
+    printf("\n");
+
+    system("pause");
+    return 0;
+}
