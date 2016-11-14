@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<windows.h>
+#include<string.h>
+
+struct Person
+{
+    char name[20];
+    int count;
+}leader[3] = { "Li", 0, "Zhang", 0, "Sun", 0 };
+
+int main()
+{
+    int i = 0, j = 0;
+    char leader_name[20];
+    for (i = 0; i < 3; i++)
+    {
+        printf("please input the name of leader:\n");
+        gets_s(leader_name,20);
+        for (j = 0; j < 3; j++)
+        {
+            if ((strcmp(leader_name, leader[j].name)==0))
+            {
+                leader[j].count++;
+            }
+        }
+    }
+    printf("\nResult:\n");
+    for (i = 0; i < 3; i++)
+    {
+        printf("%5s:%d\n",leader[i].name,leader[i].count);
+
+    }
+
+    system("pause");
+    return 0;
+}
