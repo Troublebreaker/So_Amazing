@@ -1,0 +1,145 @@
+/完成迷宫
+#pragma warning (disable:4996)
+#include<iostream>
+#include<vector>
+#include<stack>
+using namespace std;
+#include<assert.h>
+
+
+//创建迷宫->动态创建二维数组：1.int[][N]  2.int*->（二维数组是按照一维数组来存储的）
+//打印迷宫
+//走迷宫
+
+const size_t N = 10;//定义全局变量N
+
+struct Pos
+{
+    int _row;
+    int _col;
+};
+
+//思考：三元组->适合适合什么问题？迷宫？二维数组？
+void InitMaze(int maze[][N])
+{
+    FILE*fout = fopen("MazeMap.txt", "r");
+    assert(fout);
+
+    for (int i = 0; i < N; ++i)
+    {
+        for (int j = 0; j < N;)
+        {
+            //获取文件中的字符用fgetc()
+
+            char ch = fgetc(fout);
+            if (ch == '0' || ch == '1')//因为在文件中保存，所有数字均为字符数字
+            {
+                maze[i][j] = ch-'0';
+                ++j;
+            }
+
+        }
+
+    }
+}
+
+
+void PrintMaze(int maze[][N])
+{
+    for (int i = 0; i < N; ++i)
+    {
+        for (int j = 0; j < N; ++j)
+        {
+
+            cout << maze[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+
+}
+
+
+bool GetMazePathR(int maze[][N], size_t n, Pos cur,
+                  stack<Pos>& shortPath, stack<Pos>& path)
+{
+    path.push(cur);
+    if (cur._row == n-1)
+    {
+        if (shortPath.empty() || path.size() < shortPath.size())
+        {
+            shortPath = path;
+        }
+
+        //return true;
+    }
+
+    //maze[cur._row][cur._col] = 2;
+    Pos next;
+
+    // 上
+    next = cur;
+    next._row -= 1;
+    if (CheckAccess(maze, n, cur, next))
+    {
+        maze[next._row][next._col] = maze[cur._row][cur._col]+1;
+        if(GetMazePathR(maze, n, next, shortPath, path))
+            return true;
+    }
+
+    // 右
+    next = cur;
+    next._col += 1;
+    if (CheckAccess(maze, n, cur, next))
+    {
+        maze[next._row][next._col] = maze[cur._row][cur._col]+1;
+        //if (GetMazePathR(maze, n, next))
+        if(GetMazePathR(maze, n, next, shortPath, path))
+            return true;
+    }
+
+    // 下
+    next = cur;
+    next._row += 1;
+    if (CheckAccess(maze, n, cur, next))
+    {
+        maze[next._row][next._col] = maze[cur._row][cur._col]+1;
+        //if (GetMazePathR(maze, n, next))
+        if(GetMazePathR(maze, n, next, shortPath, path))
+            return true;
+    }
+
+    // 左
+    next = cur;
+    next._col -= 1;
+    if (CheckAccess(maze, n, cur, next))
+    {
+        maze[next._row][next._col] = maze[cur._row][cur._col]+1;
+        //if (GetMazePathR(maze, n, next))
+        if(GetMazePathR(maze, n, next, shortPath, path))
+            return true;
+    }
+
+    path.pop();
+
+    return false;
+}
+
+int main()
+{
+    int maze[N][N];
+    InitMaze(maze);
+    PrintMaze(maze);
+
+    Pos entry = { 1,0 };
+    //GetMazePath(maze, entry);
+    //PrintMaze(maze);
+
+
+    stack<Pos>path;
+    stack<Pos>shortPath;
+    GetMazePathR(maze,N,entry,shortPath,path );
+    PrintMaze(maze);
+
+    return 0;
+}
